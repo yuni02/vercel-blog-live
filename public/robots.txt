@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://vercel-blog-yunkyeong-51uf.vercel.app
+
+# Sitemaps
+Sitemap: https://vercel-blog-yunkyeong-51uf.vercel.app/sitemap.xml
