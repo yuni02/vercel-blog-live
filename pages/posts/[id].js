@@ -47,13 +47,11 @@ const Button = ({ children }) => {
 const components = { Button, CodeBlock }
 export default function Post({ postData }) {
   const router = useRouter()
-  console.log('!!! fallback', router.isFallback)
 
   if (router.isFallback) {
     return <div>Loading...</div>
   }
 
-  console.log('postData>>', postData)
   return (
     <Layout>
       <article>
