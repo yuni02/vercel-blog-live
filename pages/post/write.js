@@ -1,8 +1,26 @@
-import Layout from '../../components/Layout'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import getConfig from 'next/config'
+
+// export async function getServerSideProps() {
+//   return {}
+// }
+
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+// Will only be available on the server-side
+console.log(serverRuntimeConfig.mySecret)
+// Will be available on both server-side and client-side
+console.log(publicRuntimeConfig.staticFolder)
 
 export default function Write() {
+  const router = useRouter()
+
+  useEffect(() => {
+    console.log(router.query)
+  }, [router.query])
+
   const [showLink, setShowLink] = useState(false)
   const idRef = useRef(undefined)
   const titleRef = useRef(undefined)
@@ -39,10 +57,15 @@ export default function Write() {
   }
 
   return (
-    <Layout>
-      <h1>write a Post</h1>
+    <>
+      <Head>
+        <title>Write a Post</title>
+      </Head>
+      <h1>write a Post {process.env.customKey}</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="id" placeholder="id" required ref={idRef} />
+        <br />
+
         <br />
         <input
           type="text"
@@ -53,6 +76,8 @@ export default function Write() {
         />
 
         <br />
+        <br />
+
         <textarea
           type="text"
           name="content"
@@ -61,13 +86,22 @@ export default function Write() {
           ref={contentRef}
         />
         <br />
-        <input type="submit" value="Create" />
+        <br />
+        <input
+          className="rounded bg-pink-500 px-2"
+          type="submit"
+          value="Create"
+        />
       </form>
       {showLink && (
         <Link href={`/posts/${idRef.current.value}`}>
           <a>Created Post</a>
         </Link>
       )}
-    </Layout>
+    </>
   )
 }
+
+// Write.getInitialProps = async () => {
+//   return {}
+// }
