@@ -44,7 +44,6 @@ module.exports = withPlugins([withTM], {
     // Will be available on both server and client
     staticFolder: '/static',
   },
-  distDir: 'build',
   devIndicators: {
     buildActivityPosition: 'top-right',
   },
